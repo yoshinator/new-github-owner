@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/yoshinator/new-github-owner#readme",
   "dependencies": {
-    "node-fetch": "^2.6.0",
+    "axios": "^0.19.0",
     "wait-for-user-input": "^1.0.0"
   }
 }

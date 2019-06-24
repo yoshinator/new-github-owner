@@ -1,11 +1,5 @@
-function waitForUserInput(text) {
-    return new Promise((resolve, reject) => {
-        process.stdin.resume()
-        process.stdout.write(text)
-        process.stdin.once('data', data => resolve(data.toString().trim()))
-        process.stdin.once('error', reject)
-    })
-}
+const waitForUserInput = require('wait-for-user-input');
+const axios = require('axios');
 
 waitForUserInput("whats your github username?")
 .then(userInput => {
@@ -13,15 +7,30 @@ waitForUserInput("whats your github username?")
     waitForUserInput('What organization do you want to transfer your repos to?')
     .then(userInput => {
         let organization = userInput
-        fetch(`https://api.github.com/users/${username}/repos?page=$page&per_page=2`)
-        .then(response => {
-            console.log(response)
-            callGithub(username, organization, reponse)
-        })
+        callGithub(username, organization)
     })
 })
 
 function callGithub(username, organization){
-    console.log(username, organization, response)
-    // fetch(`https://api.github.com/repos/${username}/:repo/transfer`)
+    axios.get(`https://api.github.com/users/${username}/repos?page=$page&per_page=2`)
+        .then(response => {
+                updateGithub(response.data, username, organization)
+            })
+    
+}
+
+function updateGithub(repos, username, organization){
+    for (repo of repos) {
+        console.log(repo.name)
+
+        axios({
+            method: 'post',
+            url: `https://api.github.com/repos/${username}/${repo.name}/transfer`,
+            headers: { 'Accept': 'application/vnd.github.nightshade-preview+json'},
+            data: { "new_owner": organization}
+        })
+            .then(function (response) {
+                response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
+            });
+    }    
 }
