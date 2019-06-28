@@ -27,7 +27,7 @@ const inquirer = require('inquirer')
     }
 
     function callGithub(username, organization, token){
-        axios.get(`https://api.github.com/users/${username}/repos?page=$page&per_page=1`)
+        axios.get(`https://api.github.com/users/${username}/repos?page=$page&per_page=100`)
         .then(response => {
                 updateGithub(response.data, username, organization, token)
         })
