@@ -1,5 +1,5 @@
 // const waitForUserInput = require('wait-for-user-input');
-"b8f490eb1acb7708dce476b4365ffdd4e73f284d"
+
 
 const axios = require('axios');
 const inquirer = require('inquirer')
@@ -27,9 +27,9 @@ function getValues(){
 }
 
 function callGithub(username, organization, token){
-    axios.get(`https://api.github.com/users/${username}/repos?page=$page&per_page=20`)
+    axios.get(`https://api.github.com/users/${username}/repos?page=$page&per_page=5`)
         .then(response => {
-                console.log()
+                console.log("=========BEGIN RESPONSE===============\n",response,"\n===========END RESPONSE================")
                 updateGithub(response.data, username, organization, token)
             })
     
