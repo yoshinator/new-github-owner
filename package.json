@@ -1,6 +1,6 @@
 {
   "name": "new-github-owner",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A utility that allows you to transfer all of your repositories to a new organization in one shot",
   "main": "transfer.js",
   "scripts": {
