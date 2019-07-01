@@ -32,7 +32,7 @@ const inquirer = require('inquirer')
                 updateGithub(response.data, username, organization, token)
         })
         .catch(e =>{
-            console.log("ERROR at callGitHub function see line 32",e)
+            console.log("ERROR at callGitHub function see line 32.\n Did you give a correct username and repo?",e)
         }) 
     }
 
@@ -49,7 +49,7 @@ const inquirer = require('inquirer')
                     console.log("Moved repo: ",response.data.name, " \nto  ", organization)
                 })
                 .catch(e => {
-                    console.log("ERROR at updateGithub line 46", e)
+                    console.log("ERROR at updateGithub line 46. Your Github token might not be correct. If you are certain it is correct then Github might have changed their Accept header value. \n Check  https://developer.github.com/v3/media/ for more info on this endpoints accept value.\nAlso check https://developer.github.com/v3/repos/ for Github's repo documentation. ", e)
                 });
         }    
     }
